@@ -7,6 +7,12 @@ class User < ApplicationRecord
   has_many :books, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
+  has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :following_users, through: :followers, source: :followed
+  #following_user:中間テーブルを通し、followerモデルのフォローされる側を取得
+  has_many :follower_users, through: :followeds, source: :follower
+  #follower_user:中間テーブルを通し、followedモデルのフォローする側を取得
 
   has_one_attached :profile_image
 
