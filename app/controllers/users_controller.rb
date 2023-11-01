@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     @users = user.following_users
   end
-
+  
   # フォロワー一覧
   def followers
     user = User.find(params[:id])
